@@ -23,12 +23,12 @@ import { NgModule } from '@angular/core';
     MovieDetailPage
   ],
   providers: [
-    { provide: APP_CONFIG, useValue: APP_DI_CONFIG},
+    { provide: APP_CONFIG, useValue: APP_DI_CONFIG },
     MovieProvider,
     NetworkProvider
   ]
 })
-export class MoviesModule {}
+export class MoviesModule { }
 
 
 //provide: BASE_URL, useValue: 'http://localhost'}

@@ -20,22 +20,18 @@ import 'rxjs/add/operator/distinctUntilChanged';
  */
 @IonicPage()
 @Component({
-  selector: "page-movies",
-  templateUrl: "movies.html",
+  selector: 'page-movies',
+  templateUrl: 'movies.html',
 })
 export class MoviesPage implements OnDestroy {
 
   movieSearch$: Subject<string> = new Subject<string>();
-  movieSelection = "now_playing";
+  movieSelection = 'now_playing';
   endPages: boolean = false;
-
-  private lastSearch: string;
-
   movies: Movie[] = [];
-
+  private lastSearch: string;
   private page: number = 0;
   private subscription: Subscription;
-
   @ViewChild(Content) content: Content;
 
   constructor(
@@ -43,14 +39,14 @@ export class MoviesPage implements OnDestroy {
     public navParams: NavParams,
     private movieProvider: MovieProvider,
     private networkProvider: NetworkProvider
-  ) {}
+  ) { }
 
   getSelection(selection: string) {
     this.reset();
     this.movieSearch$.next(selection);
   }
 
-  private reset(){
+  private reset() {
     this.page = 0;
     this.movies = [];
     this.endPages = false;
@@ -67,14 +63,12 @@ export class MoviesPage implements OnDestroy {
       .debounceTime(400)
       .switchMap((search: string) => {
         search = !!!search ? this.movieSelection : search;
-
         const searchOpt: boolean =
-          search === "now_playing" ||
-          search === "upcoming" ||
-          !!!search
+          search === 'now_playing' ||
+            search === 'upcoming' ||
+            !!!search
             ? true
             : false;
-
         this.lastSearch = search;
         this.page++;
         if (searchOpt) {
@@ -85,26 +79,22 @@ export class MoviesPage implements OnDestroy {
       })
       .subscribe((movies: Movie[]) => {
         this.movies = this.movies.concat(movies);
-
-        console.log(this.endPages);
-
         if (movies.length === 0) {
           this.endPages = true;
         }
       });
-
-    setTimeout(() => this.movieSearch$.next(""), 1000);
+    setTimeout(() => this.movieSearch$.next(''), 1000);
   }
 
   ionViewDidEnter() {
-  this.networkProvider.disconSubscribe();
-  if(!this.networkProvider.isConnected()){
-     this.networkProvider.presentToast();
-   }
+    this.networkProvider.disconSubscribe();
+    if (!this.networkProvider.isConnected()) {
+      this.networkProvider.presentToast();
+    }
   }
 
-  ionViewWillLeave(){
-  this.networkProvider.disconUnsubscribe();
+  ionViewWillLeave() {
+    this.networkProvider.disconUnsubscribe();
   }
 
   goToDetails(id: string) {
@@ -113,13 +103,12 @@ export class MoviesPage implements OnDestroy {
 
   doInfinite(infiniteScroll) {
     this.movieSearch$.next(this.lastSearch);
-    //infiniteScroll.enable(!this.endPages);
     setTimeout(() => {
       infiniteScroll.complete();
     }, 800);
-    if(!this.networkProvider.isConnected()){
-       this.networkProvider.presentToast();
-     }
+    if (!this.networkProvider.isConnected()) {
+      this.networkProvider.presentToast();
+    }
   }
 
   doRefresh(refresher) {
@@ -128,13 +117,13 @@ export class MoviesPage implements OnDestroy {
     setTimeout(() => {
       refresher.complete();
     }, 800);
-    if(!this.networkProvider.isConnected()){
-       this.networkProvider.presentToast();
-     }
+    if (!this.networkProvider.isConnected()) {
+      this.networkProvider.presentToast();
+    }
   }
 
   ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

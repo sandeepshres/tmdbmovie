@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar color='primary'>
     <ion-title>TMDB Movie</ion-title>
@@ -6,43 +5,42 @@
 </ion-header>
 
 <ion-content class='page-content'>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      refreshingSpinner="crescent">
+  <ion-refresher (ionRefresh)='doRefresh($event)'>
+    <ion-refresher-content refreshingSpinner='crescent'>
     </ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngIf="this.movie; let movie" color="dark">
-    <img  src="{{'https://image.tmdb.org/t/p/w500'+movie.backdrop_path}}"/>
-       <ion-item color="dark">
-          <div class="card-title" text-wrap>{{movie.title}}</div>
-          <div class="card-tagline" text-wrap>{{movie.tagline}}</div>
-          <ion-icon name="star" color="yellow" class="card-tagline"> {{movie.vote_average}}</ion-icon>
-          <ion-row>
-           <div *ngFor="let genre of movie.genres" class="card-subtitle" item-start>{{genre.name}}</div><br><br>
-          </ion-row>
-      </ion-item>
-      <ion-card-content class="card-content">
-        <div class="card-header">Overview</div>
-          {{movie.overview}}<br><br>
-        <ion-row>
-          <ion-col class="card-header" no-padding>
-            Release date
-          </ion-col>
-          <ion-col text-right class="card-content" no-padding>
-            {{movie.release_date | date}}
-          </ion-col>
-       </ion-row>
-       <ion-row>
-         <ion-col class="card-header" no-padding>
-           Runtime
-         </ion-col>
-         <ion-col text-right class="card-content" no-padding>
+  <ion-card *ngIf='this.movie; let movie' color='dark'>
+    <img src="{{'https://image.tmdb.org/t/p/w500'+movie.backdrop_path}}" />
+    <ion-item color='dark'>
+      <div class='card-title' text-wrap>{{movie.title}}</div>
+      <div class='card-tagline' text-wrap>{{movie.tagline}}</div>
+      <ion-icon name='star' color='yellow' class='card-tagline'> {{movie.vote_average}}</ion-icon>
+      <ion-row>
+        <div *ngFor='let genre of movie.genres' class='card-subtitle' item-start>{{genre.name}}</div><br><br>
+      </ion-row>
+    </ion-item>
+    <ion-card-content class='card-content'>
+      <div class='card-contentheader'>Overview</div>
+      {{movie.overview}}<br><br>
+      <ion-row>
+        <ion-col class='card-contentheader' no-padding>
+          Release date
+        </ion-col>
+        <ion-col text-right class='card-content' no-padding>
+          {{movie.release_date | date}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class='card-contentheader' no-padding>
+          Runtime
+        </ion-col>
+        <ion-col text-right class='card-content' no-padding>
           {{movie.runtime}} min
-         </ion-col>
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-col text-center>
-          <a href="{{'https://www.youtube.com/watch?v='+movie.videos.results[0].key}}" ion-button small icon-start color="darkyellow">
+          <a href="{{'https://www.youtube.com/watch?v='+movie.videos.results[0].key}}" ion-button small icon-start color='darkyellow'>
             <ion-icon name='videocam'></ion-icon>
             Watch Trailer
           </a>
