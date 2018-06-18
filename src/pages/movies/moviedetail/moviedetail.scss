@@ -1,0 +1,41 @@
+moviedetail {
+  .page-content{
+    background: color($colors, dark);
+  }
+  ion-card {
+    position: relative;
+    text-align: left;
+  }
+  ion-item {
+    padding: 0;
+    margin: 0;
+  }
+  ion-navbar{
+    border-bottom-color: color($colors, danger);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  .test{
+    color: white;
+  }
+  .card-subtitle {
+    font-size: 3vw;
+  }
+  .card-title {
+    font-size: 4.9vw;
+    font-weight: bold;
+  }
+  .card-tagline {
+    font-size: 3.8vw;
+  }
+  .card-header {
+    font-size: 3.8vw;
+    font-weight: bold;
+  }
+  .card-content {
+    font-size: 3.2vw;
+  }
+  .page-item{
+    background: color($colors, light);
+  }
+}

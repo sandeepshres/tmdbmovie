@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color='primary'>
+    <ion-title>TMDB Movie</ion-title>
+  </ion-navbar>
+  <ion-toolbar color='primary'>
+    <ion-segment [(ngModel)]="movieSelection" (ionChange)='getSelection(movieSelection)'>
+      <ion-segment-button value="now_playing">
+        Now Playing
+      </ion-segment-button>
+      <ion-segment-button value="upcoming">
+        Upcoming Movies
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class='page-content'>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+    <ion-grid>
+      <ion-card *ngFor='let movie of movies' (click)='goToDetails(movie.id)' class="page-item">
+        <ion-row>
+          <ion-col col-4>
+            <img src="{{'https://image.tmdb.org/t/p/w500'+movie.poster_path}}"/>
+          </ion-col>
+          <ion-col col-8>
+              <div class="card-title">{{movie.title}}</div>
+              <div class="card-subtitle">
+                {{movie.release_date | date: 'yyyy'}} <br>
+                <ion-icon name="star" color="yellow"></ion-icon> {{movie.vote_average}}<br><br>
+                {{movie.overview}}
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-grid>
+   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+     <ion-infinite-scroll-content></ion-infinite-scroll-content>
+   </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,26 @@
+page-movies {
+  .page-content{
+    background: color($colors, dark);
+  }
+  ion-card {
+    position: relative;
+    text-align: left;
+  }
+  .card-title{
+    font-size: 3.3vw;
+    font-weight: bold;
+  }
+  .page-item{
+    background: color($colors, light);
+  }
+  .card-subtitle {
+    font-size: 3.1vw;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+  .scroll-content{
+    overflow: auto;
+  }
+}
